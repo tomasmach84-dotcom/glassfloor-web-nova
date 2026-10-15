@@ -1,0 +1,38 @@
+/* ==========================================================================
+   GLASSFLOOR CD-Manual (2016): písmo webu a zápis názvů produktů
+   Zdroj: GF_CD-Manual_201608.pdf, strana 4 (Wortmarken Produkte), 6 (Schriften), 10 (Produkte)
+   Webové písmo podle manuálu: Raleway (vložené do webu ve složce fonts).
+   Helvetica Neue z manuálu je placená licence a nejde ji vložit do webu,
+   proto se používá jen Raleway a jako záloha Arial (systémové písmo podle manuálu).
+
+   ZPĚT: tento soubor stačí odpojit. Spusťte VRATIT-CD-FONT.py (odebere jediný řádek
+   <link ... cd-font.css> ze všech stránek) nebo ručně ten řádek smažte.
+   ========================================================================== */
+
+@font-face{font-family:"Raleway";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("../fonts/raleway-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Raleway";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("../fonts/raleway-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{--sans:"Raleway",Arial,sans-serif}
+
+/* Všude Raleway; přebíjí i místa, kde bylo písmo zadané zvlášť */
+html body,html body *{font-family:"Raleway",Arial,sans-serif!important}
+
+/* Raleway je širší a těžší než dosavadní Segoe, proto o stupeň lehčí řezy a o chlup menší velké nadpisy */
+html body{font-weight:350}
+.h1,.h2,.h3,.hero h1,.manifesto .m1,.break .b1,.ghost,.proj2 h4,.proj3 h4{font-weight:200!important}
+.h1{font-size:clamp(46px,5.1vw,88px)}
+
+/* --- Wortmarke produktu (manuál s. 4 a 10): malé GLASSFLOOR velkými písmeny nad velkým názvem produktu --- */
+.rady-grid .rada:not(:has(h3 em ~ em)):not(:has(a[href="na-miru.html"])) h3,
+h1.h1:has(> em){display:flex;flex-direction:column;align-items:flex-start;gap:.12em;
+  font-size:clamp(11px,.8vw,13px);font-weight:400!important;letter-spacing:.34em;text-transform:uppercase;line-height:1.2}
+.rady-grid .rada:not(:has(h3 em ~ em)):not(:has(a[href="na-miru.html"])) h3 em,
+h1.h1:has(> em) em{display:block;font-style:normal;color:inherit;text-transform:none;letter-spacing:-.01em;
+  font-weight:300!important;line-height:1.05;font-size:clamp(34px,3.2vw,52px);margin-top:.15em}
+h1.h1:has(> em){font-size:clamp(13px,1vw,16px)}
+h1.h1:has(> em) em{font-size:clamp(64px,7vw,124px)}
+.page-head .h1{max-width:none}
