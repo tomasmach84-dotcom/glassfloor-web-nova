@@ -991,3 +991,9 @@ main .lnk{font-weight:300!important;font-size:14px!important;letter-spacing:.08e
 .article .art-wrap a{border-bottom:0!important;padding-bottom:0!important;text-decoration:underline!important;text-decoration-color:var(--ul)!important;text-decoration-thickness:1px!important;text-underline-offset:6px!important}
 .article .art-wrap a:hover{opacity:.7}
 .article .art-wrap .art-nav a{text-decoration:underline!important}
+
+/* Štítek GLASSFLOOR · Heliobus na fotkách (umisťuje js/glassfloor.js) – jednotná velikost všude */
+.gf-stitek{position:absolute;display:block;z-index:3;pointer-events:none;
+  --gf-odsazeni:10px;width:96px;height:76px;
+  background:url("../img/logo-gf-heliobus-stitek.png") center/contain no-repeat}
+@media(max-width:700px){.gf-stitek{--gf-odsazeni:8px;width:72px;height:57px}}

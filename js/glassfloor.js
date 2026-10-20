@@ -24,3 +24,32 @@
   const mq = matchMedia('(min-width:941px)');
   const onMq = e => { if (e.matches) setMenu(false); };
   if (mq.addEventListener) mq.addEventListener('change', onMq); else mq.addListener(onMq);
+
+/* Štítek GLASSFLOOR · Heliobus v pravém dolním rohu fotek, které logo ještě nemají.
+   Všude stejně velký (velikost určuje css, ne rozlišení fotky), umístěný přes vlastní prvek,
+   takže se nezmění rozložení stránky a při ořezu fotky (cover) zůstane vždy v rohu viditelné části. */
+{
+  const FOTKY = ['zahrada-vodni-linie', 'zahrada-svetliky-chodnik', 'interier-bazen', 'terasa-tegernsee',
+    'pohled-shora-interier', 'interier-pracovna', 'terasa-kruhovy-svetlik', 'terasa-drevo-ctverec',
+    'terasa-pure-vyhled', 'interier-pure-jidelna', 'interier-pure-krb', 'chrome-detail-terasa',
+    'detail-interier-strop', 'detail-sklo-hrana-vodorovne', 'hero-chrome-mobil', 'hero-pure-mobil', 'hero-circle-mobil', 'varianta-airflow', 'varianta-rwa'];
+  const jeZnacena = src => FOTKY.some(n => src.indexOf('/' + n + '.') > -1);
+  document.querySelectorAll('img').forEach(img => {
+    if (!jeZnacena(img.getAttribute('src') || '')) return;
+    const rodic = img.parentElement;
+    if (getComputedStyle(rodic).position === 'static') rodic.style.position = 'relative';
+    const st = document.createElement('i');
+    st.className = 'gf-stitek';
+    st.setAttribute('aria-hidden', 'true');
+    img.after(st);
+    const umisti = () => {
+      const w = st.offsetWidth, h = st.offsetHeight, m = parseFloat(getComputedStyle(st).getPropertyValue('--gf-odsazeni')) || 10;
+      st.style.left = (img.offsetLeft + img.offsetWidth - w - m) + 'px';
+      st.style.top = (img.offsetTop + img.offsetHeight - h - m) + 'px';
+    };
+    umisti();
+    img.addEventListener('load', umisti);
+    addEventListener('resize', umisti);
+    if (window.ResizeObserver) new ResizeObserver(umisti).observe(img);
+  });
+}
